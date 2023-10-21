@@ -12,42 +12,26 @@
 void processMonty(stream_t file)
 {
 	stack_t *stack = NULL;
-	char *opcodes, *line = NULL;
-	int line_number, found;
-	size_t j, num_opcodes = 0, len = 0;
-	instruction_t instruction[] = {
-		{"push", pushFunc}, {"pall", pallFunc}
-	};
-	num_opcodes = sizeof(instruction) / sizeof(instruction[0]);
+	char *line = NULL;
+	int line_number;
+	size_t len = 0;
+
 	line = malloc(1024);
 	if (line == NULL)
-	   fprintf(stderr, "Error: malloc failed\n");
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(0);
+	}
+
 	len = sizeof(line);
 	line_number = 1;
-	found = 0;
 
 	while ((fgets(line, len, file.file)) != NULL)
 	{
-		opcodes = strtok(line, " \t\n$");
-		if (opcodes == NULL || strlen(opcodes) == 0)
-			continue;
-
-		for (j  = 0; j < num_opcodes; j++)
-		{
-			if (strcmp(opcodes, instruction[j].opcode) == 0)
-			{
-				instruction[j].f(&stack, line_number);
-				found = 1;
-				break;
-			}
-		}
-		if (!found)
-		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcodes);
-			free(line);
-			exit(EXIT_FAILURE);
-		}
+		processInstruction(line, line_number, &stack);
+		line_number++;
 	}
+
 	free(line);
 	freeStack(&stack);
 }

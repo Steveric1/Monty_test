@@ -49,4 +49,5 @@ void pushFunc(stack_t **stack, unsigned int line_number);
 void pallFunc(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int data);
 void freeStack(stack_t **stack);
+void processInstruction(char *line, unsigned int line_number, stack_t **stack);
 #endif /*_MONTY_H_*/
