@@ -20,6 +20,8 @@ void processMonty(stream_t file)
 	};
 	num_opcodes = sizeof(instruction) / sizeof(instruction[0]);
 	line = malloc(1024);
+	if (line == NULL)
+	   fprintf(stderr, "Error: malloc failed\n");
 	len = sizeof(line);
 	line_number = 1;
 	found = 0;
