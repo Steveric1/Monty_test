@@ -7,9 +7,8 @@
  */
 void add_node(stack_t **stack, int data)
 {
-	stack_t *temp, *new_node;
+	stack_t *new_node;
 
-	temp = *stack;
 	new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)

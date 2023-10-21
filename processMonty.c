@@ -14,15 +14,17 @@ void processMonty(stream_t file)
 	stack_t *stack = NULL;
 	char *opcodes, *line = NULL;
 	int line_number, found;
-	size_t i, j, num_token = 0, num_opcodes = 0, len = 0;
+	size_t j, num_opcodes = 0, len = 0;
 	instruction_t instruction[] = {
 		{"push", pushFunc}, {"pall", pallFunc}
 	};
 	num_opcodes = sizeof(instruction) / sizeof(instruction[0]);
+	line = malloc(1024);
+	len = sizeof(line);
 	line_number = 1;
 	found = 0;
 
-	while (getline(&line, &len, file.file) != -1)
+	while ((fgets(line, len, file.file)) != NULL)
 	{
 		opcodes = strtok(line, " \t\n$");
 		if (opcodes == NULL || strlen(opcodes) == 0)
@@ -40,7 +42,6 @@ void processMonty(stream_t file)
 		if (!found)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcodes);
-			fclose(file.file);
 			free(line);
 			exit(EXIT_FAILURE);
 		}

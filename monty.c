@@ -9,7 +9,7 @@
  */
 int main(int ac, char **av)
 {
-	char *buffer, *file_path;
+	char *file_path;
 	stream_t file;
 
 	if (ac != 2)
@@ -28,4 +28,5 @@ int main(int ac, char **av)
 
 	processMonty(file);
 	fclose(file.file);
+	return (0);
 }

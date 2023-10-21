@@ -8,12 +8,11 @@
 void pushFunc(stack_t **stack, unsigned int line_number)
 {
 	char *value;
-	int n, i;
-	stack_t *new_node;
+	int n, i = 0;
 	stream_t fc;
 
+	fc.file = NULL;
 	value = strtok(NULL, " \t\n$");
-	i = 0;
 	if (value)
 	{
 		if (value[0] == '-')
