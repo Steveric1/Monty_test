@@ -14,7 +14,8 @@ void processInstruction(char *line, unsigned int line_number, stack_t **stack)
 
 	instruction_t instruction[] = {
 		{"push", pushFunc}, {"pall", pallFunc},
-		{"pint", pintFunc}, {"pop", popFunc}
+		{"pint", pintFunc}, {"pop", popFunc},
+		{"swap", swapFunc}
 	};
 	num_opcodes = sizeof(instruction) / sizeof(instruction[0]);
 	opcodes = strtok(line, " \t\n$");
