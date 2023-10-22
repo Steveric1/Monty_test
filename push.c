@@ -9,9 +9,7 @@ void pushFunc(stack_t **stack, unsigned int line_number)
 {
 	char *value;
 	int n, i = 0;
-	stream_t fc;
-
-	fc.file = NULL;
+	
 	value = strtok(NULL, " \t\n$");
 	if (value)
 	{
@@ -22,7 +20,7 @@ void pushFunc(stack_t **stack, unsigned int line_number)
 			if (value[i] > 57 || value[i] < 48)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				fclose(fc.file);
+				fclose(bus.file);
 				freeStack(stack);
 				exit(EXIT_FAILURE);
 			}
@@ -31,7 +29,7 @@ void pushFunc(stack_t **stack, unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		fclose(fc.file);
+		fclose(bus.file);
 		freeStack(stack);
 		exit(EXIT_FAILURE);
 	}

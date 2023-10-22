@@ -1,5 +1,6 @@
 #include "monty.h"
 
+stream_t bus = {NULL};
 /**
  * main - stack and queue data structure interpreter
  * @av: argument
@@ -20,6 +21,7 @@ int main(int ac, char **av)
 
 	file_path = av[1];
 	file.file = fopen(file_path, "r");
+	bus.file = file.file;
 	if (file.file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file_path);
