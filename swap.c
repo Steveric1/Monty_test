@@ -8,24 +8,26 @@
 void swapFunc(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
+	int node_count, t;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	node_count = 0;
+	temp = *stack;
+
+	while (temp != NULL)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		temp = temp->next;
+		node_count++;
+	}
+
+	if (node_count < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		fclose(bus.file);
 		exit(EXIT_FAILURE);
 	}
 
 	temp = *stack;
-	*stack = (*stack)->next;
-
-	if ((*stack)->next != NULL)
-	{
-		(*stack)->next->prev = temp;
-	}
-
-	temp->prev = *stack;
-	temp->next = (*stack)->next;
-	(*stack)->next = temp;
-	(*stack)->prev = NULL;
+	t = temp->n;
+	temp->n = temp->next->n;
+	temp->next->n = t;
 }
